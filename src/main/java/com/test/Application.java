@@ -13,7 +13,10 @@ import org.springframework.boot.web.servlet.ServletComponentScan;
 @ServletComponentScan
 @MapperScan(basePackages = {"com.test.dao.read","com.test.dao.write"})
 public class Application {
+
     public static void main(String[] args) {
+        System.out.println("main 开始...");
         SpringApplication.run(Application.class, args);
+        System.out.println("main 结束...");
     }
 }

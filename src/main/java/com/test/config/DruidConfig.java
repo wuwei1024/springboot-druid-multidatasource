@@ -25,7 +25,7 @@ public class DruidConfig {
         //org.springframework.boot.context.embedded.ServletRegistrationBean提供类的进行注册.
         ServletRegistrationBean servletRegistrationBean = new ServletRegistrationBean(new StatViewServlet(), "/druid/*");
         //添加初始化参数：initParams
-        //白名单：
+        //白名单：127.0.0.1
         servletRegistrationBean.addInitParameter("allow", "127.0.0.1");
         //IP黑名单 (存在共同时，deny优先于allow) : 如果满足deny的话提示:Sorry, you are not permitted to view this page.
         servletRegistrationBean.addInitParameter("deny", "192.168.1.73");
@@ -34,6 +34,7 @@ public class DruidConfig {
         servletRegistrationBean.addInitParameter("loginPassword", "123456");
         //是否能够重置数据.
         servletRegistrationBean.addInitParameter("resetEnable", "false");
+        System.out.println("实例化druidStatViewServlet");
         return servletRegistrationBean;
     }
 
@@ -49,6 +50,7 @@ public class DruidConfig {
         filterRegistrationBean.addUrlPatterns("/*");
         //添加不需要忽略的格式信息.
         filterRegistrationBean.addInitParameter("exclusions", "*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*");
+        System.out.println("实例化druidStatFilter");
         return filterRegistrationBean;
     }
 

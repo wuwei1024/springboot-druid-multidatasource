@@ -23,19 +23,30 @@ import javax.sql.DataSource;
 @MapperScan(basePackages = {"com.test.dao.read"}, sqlSessionTemplateRef = "sqlSessionTemplate1")
 public class Datasource1Config {
 
+    @Bean
+    @ConfigurationProperties(prefix = "mybatis.configuration")
+    public org.apache.ibatis.session.Configuration globalConfiguration() {
+        System.out.println("实例化mybatis.configuration");
+        return new org.apache.ibatis.session.Configuration();
+    }
+
     @Primary
     @Bean(name = "datasource1")
     @ConfigurationProperties(prefix = "spring.datasource.datasource1")
     public DataSource setDataSource() {
         //return DataSourceBuilder.create().build();
+        System.out.println("实例化datasource1");
         return new DruidDataSource();
     }
 
     @Primary
     @Bean(name = "sqlSessionFactory1")
-    public SqlSessionFactory setSqlSessionFactory(@Qualifier("datasource1") DataSource dataSource) throws Exception {
+    public SqlSessionFactory setSqlSessionFactory(@Qualifier("datasource1") DataSource dataSource,
+                                                  org.apache.ibatis.session.Configuration config) throws Exception {
+        System.out.println("实例化sqlSessionFactory1");
         SqlSessionFactoryBean bean = new SqlSessionFactoryBean();
         bean.setDataSource(dataSource);
+        bean.setConfiguration(config);
         bean.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath:mapper/*.xml"));
         return bean.getObject();
     }
@@ -43,6 +54,7 @@ public class Datasource1Config {
     @Primary
     @Bean(name = "sqlSessionTemplate1")
     public SqlSessionTemplate setSqlSessionTemplate(@Qualifier("sqlSessionFactory1") SqlSessionFactory sqlSessionFactory) {
+        System.out.println("实例化sqlSessionTemplate1");
         return new SqlSessionTemplate(sqlSessionFactory);
     }
 }

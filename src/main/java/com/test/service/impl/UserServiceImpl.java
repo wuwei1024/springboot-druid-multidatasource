@@ -27,10 +27,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Result addUser(User user) {
-        try{
+        try {
             writeDao.addUser(user);
             return Result.getSuccessResult("添加成功！");
-        }catch (Exception e){
+        } catch (Exception e) {
             logger.log(Level.SEVERE, null, e);
         }
         return Result.getFailedResult("添加失败！");
@@ -38,10 +38,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Result findAllUser() {
-        try{
+        try {
             List<User> users = readDao.findAllUser();
             return Result.getSuccessResult(users);
-        }catch (Exception e){
+        } catch (Exception e) {
             logger.log(Level.SEVERE, null, e);
         }
         return Result.getFailedResult("查询失败！");
@@ -49,11 +49,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Result findUserById(String userId) {
-        if(StringUtils.isEmpty(userId)) return Result.getFailedResult("参数不能为空！");
-        try{
+        if (StringUtils.isEmpty(userId)) return Result.getFailedResult("参数不能为空！");
+        try {
             User user = readDao.findUserById(userId);
             return Result.getSuccessResult(user);
-        }catch (Exception e){
+        } catch (Exception e) {
             logger.log(Level.SEVERE, null, e);
         }
         return Result.getFailedResult("查询失败！");
