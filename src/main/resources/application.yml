@@ -8,7 +8,7 @@ server:
 spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
-    datasource1:
+    ds1:
       url: jdbc:mysql://192.168.161.131:3306/test0?useUnicode=true&characterEncoding=utf8&autoReconnect=true&useSSL=false&useAffectedRows=true
       username: root
       password: 123456
@@ -27,7 +27,7 @@ spring:
       maxPoolPreparedStatementPerConnectionSize: 20
       filters: stat,wall,slf4j
       connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
-    datasource2:
+    ds2:
       url: jdbc:mysql://192.168.161.131:3306/test1?useUnicode=true&characterEncoding=utf8&autoReconnect=true&useSSL=false&useAffectedRows=true
       username: root
       password: 123456

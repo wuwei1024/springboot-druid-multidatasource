@@ -34,7 +34,6 @@ public class DruidConfig {
         servletRegistrationBean.addInitParameter("loginPassword", "123456");
         //是否能够重置数据.
         servletRegistrationBean.addInitParameter("resetEnable", "false");
-        System.out.println("实例化druidStatViewServlet");
         return servletRegistrationBean;
     }
 
@@ -50,7 +49,6 @@ public class DruidConfig {
         filterRegistrationBean.addUrlPatterns("/*");
         //添加不需要忽略的格式信息.
         filterRegistrationBean.addInitParameter("exclusions", "*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*");
-        System.out.println("实例化druidStatFilter");
         return filterRegistrationBean;
     }
 
