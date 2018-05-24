@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.test.dao.write.WriteMapper">
+
+    <resultMap id="UserResultMap" type="com.test.entity.User">
+        <id property="userId" column="user_id"/>
+        <result property="userName" column="user_name"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+    </resultMap>
+
+    <insert id="addUser" parameterType="com.test.entity.User">
+        insert into user(user_name, age, gender, address, create_time, update_time)
+        values(#{userName}, #{age}, #{gender}, #{address}, now(), now());
+    </insert>
+
+    <update id="updateUser" parameterType="com.test.entity.User">
+
+    </update>
+
+    <delete id="delUser">
+
+    </delete>
+
+    <delete id="delUsers">
+        delete from common_app_user where user_id in
+        <foreach collection="array" index="index" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </delete>
+</mapper>
