@@ -1,11 +1,16 @@
 #web server
 server:
   port: 8080
-  context-path: /app
-  tomcat.uri-encoding: UTF-8
+  servlet:
+      context-path: /app
+  tomcat:
+    uri-encoding: UTF-8
 
 #datasource
 spring:
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     ds1:
@@ -37,7 +42,7 @@ spring:
       #是否缓存preparedStatement，也就是PSCache
       poolPreparedStatements: true
       maxPoolPreparedStatementPerConnectionSize: 20
-      filters: stat,wall,log4j
+      filters: stat,wall,slf4j
       connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
       useGlobalDataSourceStat: true
     ds2:
@@ -58,7 +63,7 @@ spring:
       testOnReturn: false
       poolPreparedStatements: true
       maxPoolPreparedStatementPerConnectionSize: 20
-      filters: stat,wall,log4j
+      filters: stat,wall,slf4j
       connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
       useGlobalDataSourceStat: true
 
