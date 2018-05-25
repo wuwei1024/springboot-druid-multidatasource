@@ -13,39 +13,41 @@ spring:
       username: root
       password: 123456
       driver-class-name: com.mysql.jdbc.Driver
-      initialSize: 1
-      minIdle: 3
+      initialSize: 5
+      minIdle: 5
       maxActive: 20
       maxWait: 60000
       timeBetweenEvictionRunsMillis: 60000
       minEvictableIdleTimeMillis: 30000
-      validationQuery: select 1 from dual
+      validationQuery: SELECT 1
       testWhileIdle: true
       testOnBorrow: false
       testOnReturn: false
       poolPreparedStatements: true
       maxPoolPreparedStatementPerConnectionSize: 20
-      filters: stat,wall,slf4j
+      filters: stat,wall,log4j,slf4j
       connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+      useGlobalDataSourceStat: true
     ds2:
       url: jdbc:mysql://192.168.161.131:3306/test1?useUnicode=true&characterEncoding=utf8&autoReconnect=true&useSSL=false&useAffectedRows=true
       username: root
       password: 123456
       driver-class-name: com.mysql.jdbc.Driver
-      initialSize: 1
-      minIdle: 3
+      initialSize: 5
+      minIdle: 5
       maxActive: 20
       maxWait: 60000
       timeBetweenEvictionRunsMillis: 60000
       minEvictableIdleTimeMillis: 30000
-      validationQuery: select 1 from dual
+      validationQuery: SELECT 1
       testWhileIdle: true
       testOnBorrow: false
       testOnReturn: false
       poolPreparedStatements: true
       maxPoolPreparedStatementPerConnectionSize: 20
-      filters: stat,wall,slf4j
+      filters: stat,wall,log4j,slf4j
       connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+      useGlobalDataSourceStat: true
 
 #mybatis
 mybatis:

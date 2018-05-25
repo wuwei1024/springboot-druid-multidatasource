@@ -19,15 +19,16 @@ import javax.sql.DataSource;
  * @author wuwei
  * @date 2018/5/3 15:00
  */
+@Primary
 @Configuration
 @MapperScan(basePackages = {"com.test.dao.read"}, sqlSessionTemplateRef = "sqlSessionTemplate1")
 public class Datasource1Config {
 
     /**
      * 配置数据源
+     *
      * @return
      */
-    @Primary
     @Bean(name = "datasource1")
     @ConfigurationProperties(prefix = "spring.datasource.ds1")
     public DataSource setDataSource() {
@@ -35,7 +36,6 @@ public class Datasource1Config {
         return new DruidDataSource();
     }
 
-    @Primary
     @Bean(name = "sqlSessionFactory1")
     public SqlSessionFactory setSqlSessionFactory(@Qualifier("datasource1") DataSource dataSource) throws Exception {
         SqlSessionFactoryBean bean = new SqlSessionFactoryBean();
@@ -52,7 +52,6 @@ public class Datasource1Config {
         return bean.getObject();
     }
 
-    @Primary
     @Bean(name = "sqlSessionTemplate1")
     public SqlSessionTemplate setSqlSessionTemplate(@Qualifier("sqlSessionFactory1") SqlSessionFactory sqlSessionFactory) {
         return new SqlSessionTemplate(sqlSessionFactory);
