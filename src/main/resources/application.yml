@@ -2,15 +2,16 @@
 server:
   port: 8080
   servlet:
-      context-path: /app
+    context-path: /app
   tomcat:
     uri-encoding: UTF-8
 
-#datasource
 spring:
+  #time format
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8
+  #datasource
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     ds1:
