@@ -32,4 +32,19 @@ public class UserController {
     public Result findUserById(@RequestParam("userId") String userId) {
         return userService.findUserById(userId);
     }
+
+    @RequestMapping("/updateUser")
+    public Result updateUser(User user) {
+        return userService.updateUser(user);
+    }
+
+    @RequestMapping("/delUser")
+    public Result delUser(@RequestParam("userId") String userId) {
+        return userService.delUser(userId);
+    }
+
+    @RequestMapping("/delUsers")
+    public Result delUsers(@RequestParam("userIds") String userIds) {
+        return userService.delUsers(userIds);
+    }
 }

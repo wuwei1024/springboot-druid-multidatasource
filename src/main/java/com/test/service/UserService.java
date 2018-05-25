@@ -13,4 +13,10 @@ public interface UserService {
     Result findAllUser();
 
     Result findUserById(String userId);
+    
+    Result updateUser(User user);
+
+    Result delUser(String userId);
+
+    Result delUsers(String userIds);
 }

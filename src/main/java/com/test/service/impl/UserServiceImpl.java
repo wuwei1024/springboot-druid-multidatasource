@@ -19,14 +19,23 @@ import java.util.logging.Logger;
  */
 @Service
 public class UserServiceImpl implements UserService {
+
     @Autowired
     private ReadMapper readDao;
     @Autowired
     private WriteMapper writeDao;
     private static Logger logger = Logger.getLogger(UserServiceImpl.class.getName());
 
+    /**
+     * 添加用户
+     *
+     * @param user
+     * @return
+     */
     @Override
     public Result addUser(User user) {
+        if (user == null || StringUtils.isEmpty(user.getUserName()))
+            return Result.getFailedResult("参数不能为空！");
         try {
             writeDao.addUser(user);
             return Result.getSuccessResult("添加成功！");
@@ -36,6 +45,11 @@ public class UserServiceImpl implements UserService {
         return Result.getFailedResult("添加失败！");
     }
 
+    /**
+     * 查找所有用户
+     *
+     * @return
+     */
     @Override
     public Result findAllUser() {
         try {
@@ -47,6 +61,12 @@ public class UserServiceImpl implements UserService {
         return Result.getFailedResult("查询失败！");
     }
 
+    /**
+     * 根据ID查找用户
+     *
+     * @param userId
+     * @return
+     */
     @Override
     public Result findUserById(String userId) {
         if (StringUtils.isEmpty(userId)) return Result.getFailedResult("参数不能为空！");
@@ -57,5 +77,60 @@ public class UserServiceImpl implements UserService {
             logger.log(Level.SEVERE, null, e);
         }
         return Result.getFailedResult("查询失败！");
+    }
+
+    /**
+     * 更新用户信息
+     *
+     * @param user
+     * @return
+     */
+    @Override
+    public Result updateUser(User user) {
+        if (user == null || StringUtils.isEmpty(user.getUserId()))
+            return Result.getFailedResult("参数不能为空！");
+        try {
+            writeDao.updateUser(user);
+            return Result.getSuccessResult("更新成功！");
+        } catch (Exception e) {
+            logger.log(Level.SEVERE, null, e);
+        }
+        return Result.getFailedResult("更新失败！");
+    }
+
+    /**
+     * 删除用户
+     *
+     * @param userId
+     * @return
+     */
+    @Override
+    public Result delUser(String userId) {
+        if (StringUtils.isEmpty(userId)) return Result.getFailedResult("参数不能为空！");
+        try {
+            writeDao.delUser(userId);
+            return Result.getSuccessResult("删除成功！");
+        } catch (Exception e) {
+            logger.log(Level.SEVERE, null, e);
+        }
+        return Result.getFailedResult("删除失败！");
+    }
+
+    /**
+     * 批量删除用户
+     *
+     * @param userIds
+     * @return
+     */
+    @Override
+    public Result delUsers(String userIds) {
+        if (StringUtils.isEmpty(userIds)) return Result.getFailedResult("参数不能为空！");
+        try {
+            writeDao.delUsers(userIds.split(","));
+            return Result.getSuccessResult("删除成功！");
+        } catch (Exception e) {
+            logger.log(Level.SEVERE, null, e);
+        }
+        return Result.getFailedResult("删除失败！");
     }
 }
