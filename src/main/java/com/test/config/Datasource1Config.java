@@ -23,6 +23,10 @@ import javax.sql.DataSource;
 @MapperScan(basePackages = {"com.test.dao.read"}, sqlSessionTemplateRef = "sqlSessionTemplate1")
 public class Datasource1Config {
 
+    /**
+     * 配置数据源
+     * @return
+     */
     @Primary
     @Bean(name = "datasource1")
     @ConfigurationProperties(prefix = "spring.datasource.ds1")
@@ -33,12 +37,18 @@ public class Datasource1Config {
 
     @Primary
     @Bean(name = "sqlSessionFactory1")
-    public SqlSessionFactory setSqlSessionFactory(@Qualifier("datasource1") DataSource dataSource,
-                                                  org.apache.ibatis.session.Configuration config) throws Exception {
+    public SqlSessionFactory setSqlSessionFactory(@Qualifier("datasource1") DataSource dataSource) throws Exception {
         SqlSessionFactoryBean bean = new SqlSessionFactoryBean();
+        //设置数据源
         bean.setDataSource(dataSource);
-        bean.setConfiguration(config);
+        //设置驼峰转换
+        org.apache.ibatis.session.Configuration configuration = new org.apache.ibatis.session.Configuration();
+        configuration.setMapUnderscoreToCamelCase(true);
+        bean.setConfiguration(configuration);
+        //设置mapper文件位置
         bean.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath:mapper/*.xml"));
+        //给包中的类注册别名，注册后可以直接使用类名，而不用使用全限定的类名
+        bean.setTypeAliasesPackage("com.test.entity");
         return bean.getObject();
     }
 

@@ -30,12 +30,14 @@ public class Datasource2Config {
     }
 
     @Bean(name = "sqlSessionFactory2")
-    public SqlSessionFactory setSqlSessionFactory(@Qualifier("dataSource2") DataSource dataSource,
-                                                  org.apache.ibatis.session.Configuration config) throws Exception {
+    public SqlSessionFactory setSqlSessionFactory(@Qualifier("dataSource2") DataSource dataSource) throws Exception {
         SqlSessionFactoryBean bean = new SqlSessionFactoryBean();
         bean.setDataSource(dataSource);
-        bean.setConfiguration(config);
+        org.apache.ibatis.session.Configuration configuration = new org.apache.ibatis.session.Configuration();
+        configuration.setMapUnderscoreToCamelCase(true);
+        bean.setConfiguration(configuration);
         bean.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath:mapper/*.xml"));
+        bean.setTypeAliasesPackage("com.test.entity");
         return bean.getObject();
     }
 
