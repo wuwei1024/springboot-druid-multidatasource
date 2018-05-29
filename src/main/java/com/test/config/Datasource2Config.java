@@ -84,10 +84,8 @@ public class Datasource2Config {
      *
      * @return
      */
-    @Bean(name = "datasource2TransactionManager")
-    public DataSourceTransactionManager clusterTransactionManager(@Qualifier("dataSource2") DataSource dataSource) {
-        DataSourceTransactionManager dataSourceTransactionManager = new DataSourceTransactionManager();
-        dataSourceTransactionManager.setDataSource(dataSource);
-        return dataSourceTransactionManager;
+    @Bean(name = "transactionManager2")
+    public DataSourceTransactionManager setTransactionManager(@Qualifier("dataSource2") DataSource dataSource) {
+        return new DataSourceTransactionManager(dataSource);
     }
 }
