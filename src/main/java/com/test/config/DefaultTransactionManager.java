@@ -18,7 +18,7 @@ public class DefaultTransactionManager implements TransactionManagementConfigure
     private PlatformTransactionManager transactionManager2;
 
     /**
-     * 配置默认的事物管理器
+     * 配置默认的事务管理器
      *
      * @return
      */
