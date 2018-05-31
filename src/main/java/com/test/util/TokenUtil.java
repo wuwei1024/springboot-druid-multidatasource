@@ -8,7 +8,7 @@ import org.springframework.util.StringUtils;
  */
 public class TokenUtil {
     /**
-     * 根据用户名、密码和过期时间计算token
+     * 根据用户名、密码和过期时间生成token
      *
      * @param username
      * @param password
